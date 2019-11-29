@@ -1,6 +1,11 @@
 package exercise;
 
-public interface Constants {
-    Double IVA = 0.21;
+class Constants {
+
+    private Constants() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    static final Double IVA = 0.21;
 
 }
