@@ -1,5 +1,8 @@
 package exercise;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -7,8 +10,8 @@ import java.util.logging.Logger;
 
 public class OneToTen {
     private Logger logger = Logger.getLogger("Logger");
-    private String onlyNumbers = "Solo se permiten ingresar números";
-    private String numbers = "El número";
+    private String onlyNumbersLabel = "Solo se permiten ingresar números";
+    private String numbersLabel = "El número";
     private String errorLabel = "ERROR";
 
 
@@ -17,9 +20,9 @@ public class OneToTen {
             return "Los números" + " " + "son iguales";
         }
         if (firstNumber > secondNumber) {
-            return numbers + " " + firstNumber + " es mayor que " + secondNumber;
+            return numbersLabel + " " + firstNumber + " es mayor que " + secondNumber;
         } else {
-            return numbers + " " + secondNumber + " es mayor que " + firstNumber;
+            return numbersLabel + " " + secondNumber + " es mayor que " + firstNumber;
         }
     }
 
@@ -27,7 +30,7 @@ public class OneToTen {
         try {
             return isBiggerThan(Integer.parseInt(primerNumero), Integer.parseInt(segundoNumero));
         } catch (NumberFormatException e) {
-            return onlyNumbers;
+            return onlyNumbersLabel;
         }
     }
 
@@ -37,7 +40,7 @@ public class OneToTen {
             double area = Math.PI * (radioCalculate * radioCalculate);
             return "El área del circulo es " + area;
         } catch (NumberFormatException e) {
-            return onlyNumbers;
+            return onlyNumbersLabel;
         }
     }
 
@@ -46,7 +49,7 @@ public class OneToTen {
             double iva = Double.parseDouble(productPrice) * Constants.IVA;
             return (iva >= 0) ? ("El IVA del producto es " + iva) : ("El producto debe ser mayor a 0");
         } catch (NumberFormatException e) {
-            return onlyNumbers;
+            return onlyNumbersLabel;
         }
     }
 
@@ -94,11 +97,11 @@ public class OneToTen {
         try {
             int number = Integer.parseInt(inputNumber);
             if (number == 0) {
-                return numbers + " es 0";
+                return numbersLabel + " es 0";
             } else if (number > 0) {
-                return numbers + " " + number + " es mayor a 0";
+                return numbersLabel + " " + number + " es mayor a 0";
             } else {
-                return numbers + " es menor que 0";
+                return numbersLabel + " es menor que 0";
             }
         } catch (NumberFormatException e) {
             return errorLabel;
@@ -218,5 +221,24 @@ public class OneToTen {
             }
         }
         return difference.toString();
+    }
+
+    public String printCurrentDate() {
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime currentDate = LocalDateTime.now();
+        return "La fecha actual es:" + " " + formatDate.format(currentDate);
+    }
+
+    public ArrayList<Integer> printInputNumberUntilOneHundred(String inputNumber) {
+        try {
+            ArrayList<Integer> result = new ArrayList();
+            for (int number = Integer.parseInt(inputNumber); number <= 1000; number = number + 2) {
+                result.add(number);
+            }
+            return result;
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException();
+        }
+
     }
 }

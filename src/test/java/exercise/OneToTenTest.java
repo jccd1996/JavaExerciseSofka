@@ -4,9 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import wrapper.IntegerAsker;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
 class OneToTenTest {
@@ -203,18 +207,58 @@ class OneToTenTest {
     }
 
     @Test
-    void print_diference_beetwen_two_words_first_bigger_than_second() {
+    void print_diference_between_two_words_first_bigger_than_second() {
         String firstWord = "Casa";
         String secondWord = "CasaGrande";
         String result = "La diferencias son: Grande";
         assertEquals(result, oneToTen.printDifferencesLetters(firstWord, secondWord));
 
     }
+
     @Test
-    void print_diference_beetwen_two_words_second_bigger_than_first() {
+    void print_diference_between_two_words_second_bigger_than_first() {
         String firstWord = "CasaGrande";
         String secondWord = "Casa";
         String result = "La diferencias son: Grande";
         assertEquals(result, oneToTen.printDifferencesLetters(firstWord, secondWord));
     }
+
+    @Test
+    void print_when_the_words_are_equals() {
+        String firstWord = "CasaGrande";
+        String secondWord = "CasaGrande";
+        String result = "Son iguales";
+        assertEquals(result, oneToTen.printDifferencesLetters(firstWord, secondWord));
+    }
+
+    @Test
+    void print_when_the_words_are_differents() {
+        String firstWord = "HolaJeje";
+        String secondWord = "Bienvenido";
+        String result = "La diferencias son: Bienvnido";
+        assertEquals(result, oneToTen.printDifferencesLetters(firstWord, secondWord));
+    }
+
+    @Test
+    void print_current_date() {
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime currentDate = LocalDateTime.now();
+
+        String result = "La fecha actual es:" + " " + formatDate.format(currentDate);
+        assertEquals(result, oneToTen.printCurrentDate());
+    }
+
+    @Test
+    void print_number_since_zero_input_number_until_one_thousand() {
+        ArrayList result = new ArrayList();
+        for (int i = 0; i <= 1000; i = i + 2) {
+            result.add(i);
+        }
+        String number = "0";
+        assertEquals(result, oneToTen.printInputNumberUntilOneHundred(number));
+    }
+
+
+
+
 }
